@@ -13,9 +13,6 @@ class Person{
             this->name = name;
             this->mobileNo = mobileNo;
         }
-        Person(){
-
-        }
         void personDetails(){
             cout << "Name: " << name << endl << "Age: " << age << endl <<  "Mobile No: " << mobileNo << endl;
         }
@@ -47,40 +44,28 @@ class Employee : public Person{
 class Student : public Person{
     private:
         int rollNo;
-        int marks[5];
         int studyHours;
     public:
-        Student(string name, int age, long long int mobileNo, int rollNo, int marks[5], int studyHours) : Person(name, age, mobileNo){
-            for(int i=0; i<5; i++){
-                this->marks[i] = marks[i];
-            }
+        Student(string name, int age, long long int mobileNo, int rollNo, int studyHours) : Person(name, age, mobileNo){
             this->rollNo = rollNo;
             this->studyHours = studyHours;
         }
-        void calculatePercentage(){
-            int sum=0;
-            for(int i=0; i<5; i++){
-                sum += marks[i];
-            }
-            return sum/5;
-        }
 
         void studentDetails(){
-            cout << "Name: " << name << endl << "Age: " << age << endl <<  "Mobile No: " << mobileNo << endl << "Studying Hours: " << studyHours << endl <<  "Roll No: " << rollNo << endl << "Percentage: " << calculatePercentage();
+            cout << "Name: " << name << endl << "Age: " << age << endl <<  "Mobile No: " << mobileNo << endl << "Studying Hours: " << studyHours << endl <<  "Roll No: " << rollNo << endl;
         }
 
         int getRollNo(){return rollNo;}
-        int getMarks(){return marks;}
         int getStudyHours(){return studyHours;}
         void actionPerformed(){cout<<"Student is studying.";}
-}
+};
 
 int main(){
-    Employee e1("Sahil Kumar", 21, 8748034893, 50000, 7);
+    Employee e1("Darius Tenz", 21, 8748034893, 50000, 7);
     e1.employeeDetails();
     e1.actionPerformed();
 
-    Student s1("Manan Gupta", 19, 7389923902, 328, {89, 90, 97, 67, 98}, 12);
+    Student s1("Smith Jones", 19, 7389923902, 328, 12);
     s1.studentDetails();
     return 0;
 }
