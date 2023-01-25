@@ -72,15 +72,6 @@ class MobileFactory : public ElectronicsFactory{
         }
 };
 
-/*class Laptop{
-    protected:
-        string name;
-        string os;
-        int price;
-    public:
-        virtual string features(){};
-};*/
-
 class Dell : public Electronics{
     public:
         Dell(){
