@@ -5,16 +5,16 @@ class PizzaRecipe {
     public:
         virtual void addCheese(string cheese) = 0;
         virtual void addSauce(string sauce) = 0;
-        virtual void addPepperoni(string pepperoni) = 0;
-        virtual void addOlives(string olives) = 0;
+        virtual void addMeat(string meat) = 0;
+        virtual void addTopping(string topping) = 0;
 };
 
 class Pizza : public PizzaRecipe {
     private:
         string cheese;
         string sauce;
-        string pepperoni;
-        string olives;
+        string meat;
+        string topping;
 
     public:
         Pizza(){
@@ -26,11 +26,11 @@ class Pizza : public PizzaRecipe {
         void addSauce(string sauce){
             this->sauce = sauce;
         }
-        void addPepperoni(string pepperoni){
-            this->pepperoni = pepperoni;
+        void addMeat(string meat){
+            this->meat = meat;
         }
-        void addOlives(string olives){
-            this->olives = olives;
+        void addTopping(string topping){
+            this->topping = topping;
         }
         string getCheese(){
             return cheese;
@@ -38,11 +38,11 @@ class Pizza : public PizzaRecipe {
         string getSauce(){
             return sauce;
         }
-        string getPepperoni(){
-            return pepperoni;
+        string getMeat(){
+            return meat;
         }
-        string getOlives(){
-            return olives;
+        string getTopping(){
+            return topping;
         }
 };
 
@@ -51,8 +51,17 @@ class PizzaBuilder {
         Pizza* pizza;
 
     public:
-        PizzaBuilder(){
-            pizza = new Pizza; 
+        virtual void addCheese() = 0;
+        virtual void addSauce() = 0;
+        virtual void addMeat() = 0;
+        virtual void addTopping() = 0;
+        virtual Pizza* getPizza() = 0;
+};
+
+class HawaiianPizzaBuilder : public PizzaBuilder {
+    public:
+        HawaiianPizzaBuilder(){
+            pizza = new Pizza();
         }
         void addCheese(){
             pizza->addCheese("Mozzarella");
@@ -60,11 +69,33 @@ class PizzaBuilder {
         void addSauce(){
             pizza->addSauce("Tomato");
         }
-        void addPepperoni(){
-            pizza->addPepperoni("Pepperoni");
+        void addMeat(){
+            pizza->addMeat("Ham");
         }
-        void addOlives(){
-            pizza->addOlives("Black Olives");
+        void addTopping(){
+            pizza->addTopping("Pineapple");
+        }
+        Pizza* getPizza(){
+            return pizza;
+        }
+};
+
+class PepperoniPizzaBuilder : public PizzaBuilder {
+    public:
+        PepperoniPizzaBuilder(){
+            pizza = new Pizza();
+        }
+        void addCheese(){
+            pizza->addCheese("Mozzarella");
+        }
+        void addSauce(){
+            pizza->addSauce("Tomato");
+        }
+        void addMeat(){
+            pizza->addMeat("Pepperoni");
+        }
+        void addTopping(){
+            pizza->addTopping("Olives");
         }
         Pizza* getPizza(){
             return pizza;
@@ -85,19 +116,19 @@ class PizzaDirector {
         void makePizza(){
             pizzaBuilder->addCheese();
             pizzaBuilder->addSauce();
-            pizzaBuilder->addPepperoni();    
-            pizzaBuilder->addOlives();
+            pizzaBuilder->addMeat();    
+            pizzaBuilder->addTopping();
         }
 };
 
 int main(){
-    PizzaBuilder* pizzaBuilder = new PizzaBuilder();
+    PizzaBuilder* pizzaBuilder = new HawaiianPizzaBuilder();
     PizzaDirector pizzaDirector(pizzaBuilder);
     pizzaDirector.makePizza();
     Pizza* pizza = pizzaDirector.getPizza();
     cout << "Cheese: " << pizza->getCheese() << endl;
     cout << "Sauce: " << pizza->getSauce() << endl;
-    cout << "Pepperoni: " << pizza->getPepperoni() << endl;
-    cout << "Olives: " << pizza->getOlives() << endl;
+    cout << "Meat: " << pizza->getMeat() << endl;
+    cout << "Topping: " << pizza->getTopping() << endl;
     return 0;
 };
