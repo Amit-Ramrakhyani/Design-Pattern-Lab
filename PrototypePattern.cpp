@@ -73,6 +73,8 @@ int main(){
     cout << "Age: " << prototype->getAge() << endl;
     cout << "Address: " << prototype->getAddress() << endl;
     cout << "Phone: " << prototype->getPhone() << endl;
+
+    cout << prototype << "  " << clone << endl;
     
     return 0;
 }
