@@ -7,7 +7,7 @@ class Mobile{
         string os;
         int price;
     public:
-        virtual string call(){};
+        virtual string call() = 0;
 };
 
 class Samsung : public Mobile{
